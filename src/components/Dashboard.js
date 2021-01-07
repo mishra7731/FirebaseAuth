@@ -26,19 +26,16 @@ const Dashboard = () => {
         <div>
            <Card>
                 <Card.Body>
-                    <h2 classname = 'text-center mb-4'>
-                        Profile
-                    </h2>
+                    <h2 classname = 'text-center mb-4'> Profile </h2>
                     {error? 
                         (<Alert variant = "danger">{JSON.stringify(error)}</Alert>
                         ) : (
                             ""
                     )}
-                    <strong>Email: </strong>
+                    <strong> Email: </strong>
                     {currentUser && currentUser.email}
-                    <Link to = '/update-profile' classname = 'btn btn-primary w-100 mt-3'> 
-                        Update Profile 
-                    </Link>
+
+                    <Link to = '/update-profile' classname = 'btn btn-primary w-100 mt-3'> Update Profile </Link>
                 </Card.Body>
            </Card>
            <div classname = 'w-100 text-center mt-2'>
