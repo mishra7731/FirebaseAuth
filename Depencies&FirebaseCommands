@@ -9,3 +9,5 @@ firebase init
 firebase init hosting
 fire use (id of the firebase project created in console)
 firebase deploy
+
+url:  https://fir-auth-development-5fa69.web.app/
