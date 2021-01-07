@@ -16,6 +16,10 @@ const AuthProvider = (props) => {
     const login = (email, password) => {
         return auth.signInWithEmailAndPassword(email, password);
 
+    };
+
+    const logout =() =>{
+        return auth.signOut();
     }
 
     useEffect(() => {
@@ -28,7 +32,8 @@ const AuthProvider = (props) => {
         <AuthContext.Provider value={{
             currentUser, 
             signup,
-            login
+            login,
+            logout
         }}>
             {props.children}
 
