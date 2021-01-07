@@ -1,11 +1,35 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {Button, Card, Form, Alert, Container} from 'react-bootstrap';
-
+import {useAuth} from './../context/AuthContext';
+import {Link, useHistory} from 'react-router-dom';
 const Signup = () => {
     const nameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const confirmPasswordRef = useRef();
+    const history = useHistory();
+    const {signup} = useAuth();
+    const [error, setError] = useState();
+    const [loading, setLoading] = useState(false);
+
+        const handleSubmit = async(e) => {
+            e.preventDefault();
+
+            if(passwordRef.current.value !== confirmPasswordRef.current.value){
+                return setError('Passwords do not match!');
+
+            }
+            try{
+                setLoading(true);
+                setError('');
+                await signup(emailRef.current.value, passwordRef.current.value);
+                history.push("/");
+            } catch (error) {
+                setError(error);
+            }
+            setLoading(false);
+        }
+
 
     return(
         <Container 
@@ -15,7 +39,12 @@ const Signup = () => {
             <Card>
                 <Card.Body>
                     <h2 className = 'text-center mb-4'> Sign Up</h2>
-                    <Form>
+                    {error? 
+                        (<Alert variant = "danger">{JSON.stringify(error)}</Alert>
+                        ) : (
+                            ""
+                        )}
+                    <Form onSubmit = {handleSubmit}>
                         <Form.Group id = 'name'>
                             <Form.Label>Name</Form.Label>
                             <Form.Control ref={nameRef} type = 'text' required/>
@@ -32,14 +61,14 @@ const Signup = () => {
                             <Form.Label>Confirm Password</Form.Label>
                             <Form.Control ref={confirmPasswordRef} type = "password" required/>
                         </Form.Group>
-                        <Button className = "w-100" type = "submit">
+                        <Button disabled={loading} className = "w-100" type = "submit">
                             Sign Up
                         </Button>
                     </Form>
                 </Card.Body>
             </Card>
             <div className = "w-100 text-center mt-2">
-                Already have an account? Log In!
+                Already have an account? <Link to = "/login">Log In!</Link> 
 
             </div>
             </div>
