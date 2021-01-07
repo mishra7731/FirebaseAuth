@@ -1,0 +1,11 @@
+npm install firebase
+npm install bootstrap
+npm install react-bootstrap
+npm install react-router-dom
+npm install -g firebase-tools
+npm run build
+firebase login
+firebase init
+firebase init hosting
+fire use (id of the firebase project created in console)
+firebase deploy
